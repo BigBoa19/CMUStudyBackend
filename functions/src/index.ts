@@ -6,6 +6,7 @@ import {updateUser} from "./webapp/updateUser";
 import {sendEmail} from "./util/sendEmail";
 import {createGroupHandler} from "./webapp/createGroup";
 import {updateGroup} from "./webapp/updateGroup";
+import {cleanupJob} from "./worker/cleanupJob";
 
 admin.initializeApp();
 
@@ -16,5 +17,8 @@ exports.leaveGroup = onRequest((req, res) => leaveGroup(db, req, res));
 exports.createGroup = onRequest((req, res) => createGroupHandler(db, req, res));
 exports.updateGroup = onRequest((req, res) => updateGroup(db, req, res));
 exports.updateUser = onRequest((req, res) => updateUser(db, req, res));
+
+// Worker Jobs
+exports.cleanupJob = onRequest((_req, res) => cleanupJob(db, res));
 
 exports.sendEmail = onRequest((req, res) => sendEmail(db, req, res));

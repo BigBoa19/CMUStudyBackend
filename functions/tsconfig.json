@@ -10,5 +10,5 @@
     "skipLibCheck": true                // Skip type checking of declaration files
   },
   "compileOnSave": true,
-  "include": ["src"]
+  "include": ["src", "src/sampleGroup.ts"]
 }

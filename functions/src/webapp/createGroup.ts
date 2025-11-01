@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import * as logger from "firebase-functions/logger";
-import {Firestore, Timestamp} from "firebase-admin/firestore";
+import {Firestore} from "firebase-admin/firestore";
 import {createGroup} from "../helpers";
 import {createCloudTask} from "../util/scheduleEmail";
 import {createGroupInterface} from "../types";

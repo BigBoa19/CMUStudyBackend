@@ -1,8 +1,7 @@
 import {Request, Response} from "express";
 import * as logger from "firebase-functions/logger";
-import {groupDetails, userDetails} from "../types";
+import {groupDetails} from "../types";
 import {Firestore} from "firebase-admin/firestore";
-import {logJoinEvent} from "../bq/bqService";
 import {
   fetchGroup,
   isUserOwnerOfGroup,

@@ -5,6 +5,12 @@ import Mailgun from "mailgun.js";
 import FormData from "form-data";
 import {firestore} from "firebase-admin";
 
+export const fetchAllGroups = async (db: Firestore) => {
+  const studyCollection = db.collection("Study Groups");
+  const colSnapshot = await studyCollection.get();
+  return colSnapshot;
+};
+
 export const fetchGroup = async (db: Firestore, id: string) => {
   const docPath = `Study Groups/${id}`;
   const docRef = db.doc(docPath);
@@ -91,7 +97,6 @@ export const isGroupFull = (group: groupDetails): boolean => {
 export const updateGroupMembership = async (
   db: Firestore,
   isJoinEvent: boolean,
-  email: string,
   user: Partial<userDetails>,
   groupId: string
 ): Promise<void> => {
@@ -100,7 +105,7 @@ export const updateGroupMembership = async (
   const entryToUpdate = {
     name: user?.fullName ?? "Unknown",
     url: user?.imageUrl ?? "",
-    email: email,
+    email: user?.email,
   };
   if (isJoinEvent) {
     await groupDocRef.update({
@@ -116,7 +121,7 @@ export const updateGroupMembership = async (
       await groupDocRef.delete();
     }
   }
-  const userDocPath = `Users/${email}`;
+  const userDocPath = `Users/${user.email}`;
   const userDocRef = db.doc(userDocPath);
   if (isJoinEvent) {
     await userDocRef.set(

@@ -79,7 +79,7 @@ export const joinGroup = async (
     }
 
     const isJoinEvent = true;
-    await updateGroupMembership(db, isJoinEvent, email, user, group.id);
+    await updateGroupMembership(db, isJoinEvent, user, group.id);
     res.status(200).send({success: true, message: "Added user to group."});
     try {
       await logJoinEvent(isJoinEvent, email, group.id);
